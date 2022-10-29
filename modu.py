@@ -39,7 +39,8 @@ def lemment(text):
 
 # making word cloud
 def make_cloud(T):
-    word_cloud = WordCloud(width=1920*2,height=1080*2,collocations = False, background_color = 'white',stopwords={},min_font_size=1).generate(' '.join(T))
+    word_cloud = WordCloud(width=1920*2,height=1080*2,collocations = False,
+     background_color = 'white',stopwords={},min_font_size=1).generate(' '.join(T))
     plt.imshow(word_cloud)
     plt.axis("off")
     plt.show()
