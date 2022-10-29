@@ -35,9 +35,11 @@ nlp.make_cloud(T1)
 
 # word cloud without stopwords
 stopwords = set(STOPWORDS)
+Temp = T1
 T1 = nlp.remove_stop(T1,stopwords)
 nlp.make_cloud(T1)
 
+nlp.length_vs_freq(Temp)
 nlp.length_vs_freq(T1)
 
 # POS tagging
