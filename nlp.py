@@ -41,4 +41,7 @@ nlp.make_cloud(T1)
 nlp.length_vs_freq(T1)
 
 # POS tagging
-nlp.pos_tag_penn(T1)
+Tags=nlp.pos_tag_penn(T1)
+
+#Tag Distribution
+nlp.tag_dist(Tags)

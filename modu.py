@@ -75,3 +75,11 @@ def pos_tag_penn(T):
     for i in Tags:
         print(i)
     return Tags
+# Tag Distribution
+
+def tag_dist(T):
+    pd.Series(Tag for (word,Tag) in T).value_counts()[:20].plot(kind='bar')
+    plt.title("Tags Vs Frequency")
+    plt.xlabel('Tags')
+    plt.ylabel("Frequency")
+    plt.show()
