@@ -4901,7 +4901,7 @@ Example Problems
 Our final toy problem was devised by Donald Knuth (1964) and illustrates how infinite
 state spaces can arise. Knuth conjectured that, starting with the number 4, a sequence of factorial, square root, and floor operations will reach any desired positive integer. For example,
 we can reach 5 from 4 as follows:
-
+ 
  
 
 
@@ -6087,7 +6087,7 @@ for each action in problem.ACTIONS(node.S TATE) do
 child ← C HILD -N ODE( problem, node, action)
 result ← R ECURSIVE -DLS(child , problem, limit − 1)
 if result = cutoﬀ then cutoﬀ occurred ? ← true
-else if result = failure then return result
+else if result  = failure then return result
 if cutoﬀ occurred ? then return cutoﬀ else return failure
 Figure 3.17
 
@@ -6132,7 +6132,7 @@ Uninformed Search Strategies
 function I TERATIVE -D EEPENING -S EARCH( problem) returns a solution, or failure
 for depth = 0 to ∞ do
 result ← D EPTH -L IMITED -S EARCH( problem, depth)
-if result = cutoff then return result
+if result  = cutoff then return result
 Figure 3.18 The iterative deepening search algorithm, which repeatedly applies depthlimited search with increasing limits. It terminates when a solution is found or if the depthlimited search returns failure, meaning that no solution exists.
 
 Limit = 0
@@ -7392,7 +7392,7 @@ best ← the lowest f -value node in successors
 if best .f > f limit then return failure, best.f
 alternative ← the second-lowest f -value among successors
 result, best.f ← RBFS(problem, best, min( f limit, alternative))
-if result = failure then return result
+if result  = failure then return result
 Figure 3.26
 
 The algorithm for recursive best-first search.
@@ -9556,7 +9556,7 @@ if problem.G OAL -T EST(state) then return the empty plan
 if state is on path then return failure
 for each action in problem.ACTIONS (state) do
 plan ← A ND -S EARCH (R ESULTS(state, action), problem, [state | path])
-if plan = failure then return [action | plan]
+if plan  = failure then return [action | plan]
 return failure
 function A ND -S EARCH (states, problem, path) returns a conditional plan, or failure
 for each si in states do
@@ -9712,7 +9712,7 @@ be unreachable from the initial state.
 • Initial state: Typically the set of all states in P , although in some cases the agent will
 have more knowledge than this.
 • Actions: This is slightly tricky. Suppose the agent is in belief state b = {s1 , s2 }, but
-ACTIONS P (s1 ) = ACTIONS P (s2 ); then the agent is unsure of which actions are legal.
+ACTIONS P (s1 )  = ACTIONS P (s2 ); then the agent is unsure of which actions are legal.
 If we assume that illegal actions have no effect on the environment, then it is safe to
 take the union of all the actions in any of the physical states in the current belief state b:
 
@@ -13613,7 +13613,7 @@ Defining Constraint Satisfaction Problems
 203
 
 the domain {A,B}, then the constraint saying the two variables must have different values
-can be written as (X1 , X2 ), [(A, B), (B, A)] or as (X1 , X2 ), X1 = X2 .
+can be written as (X1 , X2 ), [(A, B), (B, A)] or as (X1 , X2 ), X1  = X2 .
 To solve a CSP, we need to define a state space and the notion of a solution. Each
 state in a CSP is defined by an assignment of values to some or all of the variables, {Xi =
 vi , Xj = vj , . . .}. An assignment that does not violate any constraints is called a consistent
@@ -13630,10 +13630,10 @@ X = {WA, NT , Q, NSW , V, SA, T } .
 The domain of each variable is the set Di = {red , green, blue}. The constraints require
 neighboring regions to have distinct colors. Since there are nine places where regions border,
 there are nine constraints:
-C = {SA = WA, SA = NT , SA = Q, SA = NSW , SA = V,
-WA = NT , NT = Q, Q = NSW , NSW = V } .
-Here we are using abbreviations; SA = WA is a shortcut for (SA, WA), SA = WA, where
-SA = WA can be fully enumerated in turn as
+C = {SA  = WA, SA  = NT , SA  = Q, SA  = NSW , SA  = V,
+WA  = NT , NT  = Q, Q  = NSW , NSW  = V } .
+Here we are using abbreviations; SA  = WA is a shortcut for (SA, WA), SA  = WA, where
+SA  = WA can be fully enumerated in turn as
 {(red , green), (red , blue), (green, red ), (green, blue), (blue, red ), (blue, green)} .
 There are many possible solutions to this problem, such as
 {WA = red , NT = green, Q = red , NSW = green, V = red , SA = blue, T = red }.
@@ -13821,8 +13821,8 @@ In addition to examining the types of variables that can appear in CSPs, it is u
 look at the types of constraints. The simplest type is the unary constraint, which restricts
 the value of a single variable. For example, in the map-coloring problem it could be the case
 that South Australians won’t tolerate the color green; we can express that with the unary
-constraint (SA), SA = green
-A binary constraint relates two variables. For example, SA = NSW is a binary
+constraint (SA), SA  = green
+A binary constraint relates two variables. For example, SA  = NSW is a binary
 constraint. A binary CSP is one with only binary constraints; it can be represented as a
 constraint graph, as in Figure 6.1(b).
 We can also describe higher-order constraints, such as asserting that the value of Y is
@@ -14405,7 +14405,7 @@ Alldiﬀ (A1, A2, A3, B1, B2, B3, C1, C2, C3)
 Alldiﬀ (A4, A5, A6, B4, B5, B6, C4, C5, C6)
 ···
 Let us see how far arc consistency can take us. Assume that the Alldiﬀ constraints have been
-expanded into binary constraints (such as A1 = A2 ) so that we can apply the AC-3 algorithm
+expanded into binary constraints (such as A1  = A2 ) so that we can apply the AC-3 algorithm
 directly. Consider variable E6 from Figure 6.4(a)—the empty square between the 2 and the
 8 in the middle box. From the constraints in the box, we can remove not only 2 and 8 but also
 1 and 7 from E6 ’s domain. From the constraints in its column, we can eliminate 5, 6, 2, 8,
@@ -14485,10 +14485,10 @@ for each value in O RDER -D OMAIN -VALUES (var , assignment, csp) do
 if value is consistent with assignment then
 add {var = value} to assignment
 inferences ← I NFERENCE(csp, var , value)
-if inferences = failure then
+if inferences  = failure then
 add inferences to assignment
 result ← BACKTRACK (assignment, csp)
-if result = failure then
+if result  = failure then
 return result
 remove {var = value} and inferences from assignment
 return failure
@@ -16393,7 +16393,7 @@ in some models in which KB is true, α2 is false.
 LOGICAL INFERENCE
 MODEL CHECKING
 
-Hence, KB |= α2 : the agent cannot conclude that there is no pit in [2,2]. (Nor can it conclude
+Hence, KB  |= α2 : the agent cannot conclude that there is no pit in [2,2]. (Nor can it conclude
 that there is a pit in [2,2].)3
 The preceding example not only illustrates entailment but also shows how the definition
 of entailment can be applied to derive conclusions—that is, to carry out logical inference.
@@ -16695,7 +16695,7 @@ The truth tables for “and,” “or,” and “not” are in close accord with
 the English words. The main point of possible confusion is that P ∨ Q is true when P is true
 or Q is true or both. A different connective, called “exclusive or” (“xor” for short), yields
 false when both disjuncts are true.7 There is no consensus on the symbol for exclusive or;
-some choices are ∨˙ or = or ⊕.
+some choices are ∨˙ or  = or ⊕.
 The truth table for ⇒ may not quite fit one’s intuitive understanding of “P implies Q”
 or “if P then Q.” For one thing, propositional logic does not require any relation of causation
 or relevance between P and Q. The sentence “5 is odd implies Tokyo is the capital of Japan”
@@ -19857,7 +19857,7 @@ The sentence
 does not have the intended meaning. In particular, it is true in the model of Figure 8.2, where
 Richard has only one brother. To see this, consider the extended interpretation in which both
 x and y are assigned to King John. The addition of ¬(x = y) rules out such models. The
-notation x = y is sometimes used as an abbreviation for ¬(x = y).
+notation x  = y is sometimes used as an abbreviation for ¬(x = y).
 
 8.2.8 An alternative semantics?
 
@@ -19872,10 +19872,10 @@ two brothers, John and Geoffrey. 8 Can we capture this state of affairs by asser
 Brother (John, Richard ) ∧ Brother (Geoﬀrey , Richard ) ?
 (8.3)
 Not quite. First, this assertion is true in a model where Richard has only one brother—
-we need to add John = Geoﬀrey. Second, the sentence doesn’t rule out models in which
+we need to add John  = Geoﬀrey. Second, the sentence doesn’t rule out models in which
 Richard has many more brothers besides John and Geoffrey. Thus, the correct translation of
 “Richard’s brothers are John and Geoffrey” is as follows:
-Brother (John, Richard ) ∧ Brother (Geoﬀrey , Richard ) ∧ John = Geoﬀrey
+Brother (John, Richard ) ∧ Brother (Geoﬀrey , Richard ) ∧ John  = Geoﬀrey
 ∧ ∀ x Brother (x, Richard ) ⇒ (x = John ∨ x = Geoﬀrey) .
 For many purposes, this seems much more cumbersome than the corresponding naturallanguage expression. As a consequence, humans may make mistakes in translating their
 knowledge into first-order logic, resulting in unintuitive behaviors from logical reasoning
@@ -20049,7 +20049,7 @@ Parent and child are inverse relations:
 A grandparent is a parent of one’s parent:
 ∀ g, c Grandparent (g, c) ⇔ ∃ p Parent (g, p) ∧ Parent(p, c) .
 A sibling is another child of one’s parents:
-∀ x, y Sibling(x, y) ⇔ x = y ∧ ∃ p Parent (p, x) ∧ Parent(p, y) .
+∀ x, y Sibling(x, y) ⇔ x  = y ∧ ∃ p Parent (p, x) ∧ Parent(p, y) .
 
 DEFINITION
 
@@ -20101,7 +20101,7 @@ to be answered. The answers to these questions will then be theorems that follow
 the axioms. Often, one finds that the expected answers are not forthcoming—for example,
 from Spouse(Jim, Laura) one expects (under the laws of many countries) to be able to infer
 ¬Spouse(George, Laura); but this does not follow from the axioms given earlier—even after
-we add Jim = George as suggested in Section 8.2.8. This is a sign that an axiom is missing.
+we add Jim  = George as suggested in Section 8.2.8. This is a sign that an axiom is missing.
 Exercise 8.8 asks the reader to supply it.
 
 8.3.3 Numbers, sets, and lists
@@ -20122,8 +20122,8 @@ That is, 0 is a natural number, and for every object n, if n is a natural number
 a natural number. So the natural numbers are 0, S(0), S(S(0)), and so on. (After reading
 Section 8.2.8, you will notice that these axioms allow for other natural numbers besides the
 usual ones; see Exercise 8.12.) We also need axioms to constrain the successor function:
-∀ n 0 = S(n) .
-∀ m, n m = n ⇒ S(m) = S(n) .
+∀ n 0  = S(n) .
+∀ m, n m  = n ⇒ S(m)  = S(n) .
 Now we can define addition in terms of the successor function:
 ∀ m NatNum(m) ⇒ + (0, m) = m .
 ∀ m, n NatNum(m) ∧ NatNum(n) ⇒ + (S(m), n) = S(+(m, n)) .
@@ -20507,10 +20507,10 @@ Signal (Out(1, g)) = 0 ⇔ ∃ n Signal (In(n, g)) = 0 .
 Signal (Out(1, g)) = 1 ⇔ ∃ n Signal (In(n, g)) = 1 .
 7. An XOR gate’s output is 1 if and only if its inputs are different:
 ∀ g Gate(g) ∧ Type(g) = XOR ⇒
-Signal (Out(1, g)) = 1 ⇔ Signal (In(1, g)) = Signal (In(2, g)) .
+Signal (Out(1, g)) = 1 ⇔ Signal (In(1, g))  = Signal (In(2, g)) .
 8. A NOT gate’s output is different from its input:
 ∀ g Gate(g) ∧ (Type(g) = NOT ) ⇒
-Signal (Out(1, g)) = Signal (In(1, g)) .
+Signal (Out(1, g))  = Signal (In(1, g)) .
 9. The gates (except for NOT) have two inputs and one output.
 ∀ g Gate(g) ∧ Type(g) = NOT ⇒ Arity(g, 1, 1) .
 ∀ g Gate(g) ∧ k = Type(g) ∧ (k = AND ∨ k = OR ∨ k = XOR) ⇒
@@ -20521,7 +20521,7 @@ Arity(g, 2, 1)
 ∀ n (n ≤ j ⇒ Terminal (Out(c, n))) ∧ (n > j ⇒ Out(c, n) = Nothing)
 11. Gates, terminals, signals, gate types, and Nothing are all distinct.
 ∀ g, t Gate(g) ∧ Terminal (t) ⇒
-g = t = 1 = 0 = OR = AND = XOR = NOT = Nothing .
+g  = t  = 1  = 0  = OR  = AND  = XOR  = NOT  = Nothing .
 12. Gates are circuits.
 ∀ g Gate(g) ⇒ Circuit(g)
 Encode the specific problem instance
@@ -20579,17 +20579,17 @@ more complex concepts are defined on top of simpler concepts.
 Debug the knowledge base
 We can perturb the knowledge base in various ways to see what kinds of erroneous behaviors
 emerge. For example, suppose we fail to read Section 8.2.8 and hence forget to assert that
-1 = 0. Suddenly, the system will be unable to prove any outputs for the circuit, except for
+1  = 0. Suddenly, the system will be unable to prove any outputs for the circuit, except for
 the input cases 000 and 110. We can pinpoint the problem by asking for the outputs of each
 gate. For example, we can ask
 ∃ i1 , i2 , o Signal (In(1, C1 )) = i1 ∧ Signal (In(2, C1 )) = i2 ∧ Signal (Out(1, X1 )) ,
 which reveals that no outputs are known at X1 for the input cases 10 and 01. Then, we look
 at the axiom for XOR gates, as applied to X1 :
-Signal (Out(1, X1 )) = 1 ⇔ Signal (In(1, X1 )) = Signal (In(2, X1 )) .
+Signal (Out(1, X1 )) = 1 ⇔ Signal (In(1, X1 ))  = Signal (In(2, X1 )) .
 If the inputs are known to be, say, 1 and 0, then this reduces to
-Signal (Out(1, X1 )) = 1 ⇔ 1 = 0 .
+Signal (Out(1, X1 )) = 1 ⇔ 1  = 0 .
 Now the problem is apparent: the system is unable to infer that Signal (Out(1, X1 )) = 1, so
-we need to tell it that 1 = 0.
+we need to tell it that 1  = 0.
 
 Section 8.5.
 
@@ -20735,7 +20735,7 @@ First-Order Logic
 
 standard semantics but not according to the new semantics. Discuss which outcome makes
 more intuitive sense for your examples.
-8.8 Does the fact ¬Spouse(George, Laura ) follow from the facts Jim = George and
+8.8 Does the fact ¬Spouse(George, Laura ) follow from the facts Jim  = George and
 Spouse(Jim, Laura)? If so, give a proof; if not, supply additional axioms as needed. What
 happens if we use Spouse as a unary function symbol instead of a binary predicate?
 8.9 This exercise uses the function MapColor and predicates In(x, y), Borders (x, y), and
@@ -20769,7 +20769,7 @@ e. No two adjacent countries have the same map color.
 ¬(MapColor (x) = MapColor (y)).
 (iii) ∀ x, y Country(x) ∧ Country(y) ∧ Borders(x, y) ∧
 ¬(MapColor (x) = MapColor (y)).
-(iv) ∀ x, y (Country(x) ∧ Country(y) ∧ Borders (x, y)) ⇒ MapColor (x = y).
+(iv) ∀ x, y (Country(x) ∧ Country(y) ∧ Borders (x, y)) ⇒ MapColor (x  = y).
 
 Exercises
 
@@ -23766,10 +23766,10 @@ Init (On(A, Table) ∧ On(B, Table) ∧ On(C, A)
 Goal (On(A, B) ∧ On(B, C))
 Action(Move(b, x, y),
 P RECOND : On(b, x) ∧ Clear (b) ∧ Clear (y) ∧ Block (b) ∧ Block (y) ∧
-(b=x) ∧ (b=y) ∧ (x=y),
+(b =x) ∧ (b =y) ∧ (x =y),
 E FFECT: On(b, y) ∧ Clear (x) ∧ ¬On(b, x) ∧ ¬Clear (y))
 Action(MoveToTable (b, x),
-P RECOND : On(b, x) ∧ Clear (b) ∧ Block (b) ∧ (b=x),
+P RECOND : On(b, x) ∧ Clear (b) ∧ Block (b) ∧ (b =x),
 E FFECT: On(b, Table) ∧ Clear (x) ∧ ¬On(b, x))
 Figure 10.3 A planning problem in the blocks world: building a three-block tower. One
 solution is the sequence [MoveToTable (C, A), Move(B, Table, C), Move(A, Table, B)].
@@ -24436,7 +24436,7 @@ nogoods ← an empty hash table
 for tl = 0 to ∞ do
 if goals all non-mutex in St of graph then
 solution ← E XTRACT-S OLUTION (graph, goals, N UM L EVELS(graph), nogoods)
-if solution = failure then return solution
+if solution  = failure then return solution
 if graph and nogoods have both leveled off then return failure
 graph ← E XPAND -G RAPH(graph, problem)
 Figure 10.9 The G RAPHPLAN algorithm. G RAPHPLAN calls E XPAND -G RAPH to add a
@@ -24834,14 +24834,14 @@ some gold g after executing a possible action if and only if the action was a Gr
 or if the agent was already holding g and the action was not releasing it:
 Poss(a, s) ⇒
 (Holding (Agent, g, Result (a, s)) ⇔
-a = Grab(g) ∨ (Holding (Agent, g, s) ∧ a = Release (g))) .
+a = Grab(g) ∨ (Holding (Agent, g, s) ∧ a  = Release (g))) .
 UNIQUE ACTION
 AXIOMS
 
-• We need unique action axioms so that the agent can deduce that, for example, a =
+• We need unique action axioms so that the agent can deduce that, for example, a  =
 Release(g). For each distinct pair of action names Ai and Aj we have an axiom that
 says the actions are different:
-Ai (x, . . .) = Aj (y, . . .)
+Ai (x, . . .)  = Aj (y, . . .)
 
 390
 
@@ -26116,7 +26116,7 @@ plan ← P OP ( frontier ) /* chooses the shallowest node in frontier */
 if R EACH + (problem.I NITIAL -S TATE, plan) intersects problem.G OAL then
 if plan is primitive then return plan /* R EACH + is exact for primitive plans */
 guaranteed ← R EACH − (problem.I NITIAL -S TATE, plan) ∩ problem.G OAL
-if guaranteed={ } and M AKING-P ROGRESS(plan, initialPlan) then
+if guaranteed ={ } and M AKING-P ROGRESS(plan, initialPlan) then
 ﬁnalState ← any element of guaranteed
 return D ECOMPOSE(hierarchy , problem.I NITIAL -S TATE, plan, ﬁnalState)
 hla ← some HLA in plan
@@ -26232,7 +26232,7 @@ of an object will remain the same, even if it is not being perceived, until the 
 an action to change the object’s color. Of course, the agent will need an action that causes
 objects (one at a time) to come into view:
 Action(LookAt(x),
-P RECOND :InView(y) ∧ (x = y)
+P RECOND :InView(y) ∧ (x  = y)
 E FFECT:InView(x) ∧ ¬InView(y))
 For a fully observable environment, we would have a Percept axiom with no preconditions
 for each fluent. A sensorless agent, on the other hand, has no Percept axioms at all. Note
@@ -26772,7 +26772,7 @@ Action(Hit (actor , Ball ),
 P RECOND :Approaching (Ball , loc) ∧ At(actor , loc)
 E FFECT:Returned(Ball ))
 Action(Go(actor , to),
-P RECOND :At(actor , loc) ∧ to = loc,
+P RECOND :At(actor , loc) ∧ to  = loc,
 E FFECT:At(actor , to) ∧ ¬ At(actor , loc))
 Figure 11.10 The doubles tennis problem. Two actors A and B are playing together and
 can be in one of four locations: LeftBaseline, RightBaseline, LeftNet, and RightNet . The
@@ -26837,7 +26837,7 @@ We solve this by augmenting action schemas with one new feature: a concurrent ac
 stating which actions must or must not be executed concurrently. For example, the Hit action
 could be described as follows:
 Action(Hit(a, Ball ),
-C ONCURRENT:b = a ⇒ ¬Hit(b, Ball )
+C ONCURRENT:b  = a ⇒ ¬Hit(b, Ball )
 P RECOND :Approaching (Ball , loc) ∧ At(a, loc)
 E FFECT:Returned (Ball )) .
 In other words, the Hit action has its stated effect only if no other Hit action by another
@@ -26846,7 +26846,7 @@ partial action exclusion axiom.) For some actions, the desired effect is achieve
 another action occurs concurrently. For example, two agents are needed to carry a cooler full
 of beverages to the tennis court:
 Action(Carry(a, cooler , here, there),
-C ONCURRENT:b = a ∧ Carry (b, cooler , here, there)
+C ONCURRENT:b  = a ∧ Carry (b, cooler , here, there)
 P RECOND :At(a, here ) ∧ At(cooler , here) ∧ Cooler (cooler )
 E FFECT:At(a, there) ∧ At(cooler , there) ∧ ¬At(a, here) ∧ ¬At(cooler , here)).
 With these kinds of action schemas, any of the planning algorithms described in Chapter 10
@@ -27463,7 +27463,7 @@ NorthAmericans)
 Partition({Males, Females}, Animals) .
 (Note that the ExhaustiveDecomposition of NorthAmericans is not a Partition, because
 some people have dual citizenship.) The three predicates are defined as follows:
-Disjoint(s) ⇔ (∀ c1 , c2 c1 ∈ s ∧ c2 ∈ s ∧ c1 = c2 ⇒ Intersection(c1 , c2 ) = { })
+Disjoint(s) ⇔ (∀ c1 , c2 c1 ∈ s ∧ c2 ∈ s ∧ c1  = c2 ⇒ Intersection(c1 , c2 ) = { })
 ExhaustiveDecomposition (s, c) ⇔ (∀ i i ∈ c ⇔ ∃ c2 c2 ∈ s ∧ i ∈ c2 )
 Partition(s, c) ⇔ Disjoint(s) ∧ ExhaustiveDecomposition (s, c) .
 Categories can also be defined by providing necessary and sufficient conditions for
@@ -27504,7 +27504,7 @@ Biped (a)
 ∃ l1 , l2 , b Leg (l1 ) ∧ Leg(l2 ) ∧ Body(b) ∧
 PartOf (l1 , a) ∧ PartOf (l2 , a) ∧ PartOf (b, a) ∧
 Attached (l1 , b) ∧ Attached (l2 , b) ∧
-l1 = l2 ∧ [∀ l3 Leg(l3 ) ∧ PartOf (l3 , a) ⇒ (l3 = l1 ∨ l3 = l2 )] .
+l1  = l2 ∧ [∀ l3 Leg(l3 ) ∧ PartOf (l3 , a) ⇒ (l3 = l1 ∨ l3 = l2 )] .
 
 BUNCH
 
@@ -28288,7 +28288,7 @@ case) and stops as soon as it finds a value. We say that the default is overridd
 specific value. Notice that we could also override the default number of legs by creating a
 category of OneLeggedPersons, a subset of Persons of which John is a member.
 We can retain a strictly logical semantics for the network if we say that the Legs assertion for Persons includes an exception for John:
-∀ x x ∈ Persons ∧ x = John ⇒ Legs(x, 2) .
+∀ x x ∈ Persons ∧ x  = John ⇒ Legs(x, 2) .
 For a fixed network, this is semantically adequate but will be much less concise than the
 network notation itself if there are lots of exceptions. For a network that will be updated with
 more assertions, however, such an approach fails—we really want to say that any persons as
@@ -39263,7 +39263,7 @@ is why it is subscripted. It can change as more information is acquired. For any
 of evidence Ej , the value of acquiring it can go down (e.g., if another variable strongly
 constrains the posterior for Ej ) or up (e.g., if another variable provides a clue on which Ej
 builds, enabling a new and better plan to be devised). Thus, VPI is not additive. That is,
-VPI e (Ej , Ek ) = VPI e (Ej ) + VPI e (Ek )
+VPI e (Ej , Ek )  = VPI e (Ej ) + VPI e (Ek )
 
 (in general) .
 
@@ -44366,7 +44366,7 @@ i.i.d.. An i.i.d. assumption connects the past to the future; without some such 
 bets are off—the future could be anything. (We will see later that learning can still occur if
 there are slow changes in the distribution.)
 The next step is to define “best fit.” We define the error rate of a hypothesis as the
-proportion of mistakes it makes—the proportion of times that h(x) = y for an (x, y) example.
+proportion of mistakes it makes—the proportion of times that h(x)  = y for an (x, y) example.
 Now, just because a hypothesis h has a low error rate on the training set does not mean that
 it will generalize well. A professor knows that an exam will not accurately evaluate students
 if they have already seen the exam questions. Similarly, to get an accurate evaluation of a
@@ -47703,7 +47703,7 @@ for k = 1 to K do
 h[k ] ← L(examples, w)
 error ← 0
 for j = 1 to N do
-if h[k ](xj ) = yj then error ← error + w[j]
+if h[k ](xj )  = yj then error ← error + w[j]
 for j = 1 to N do
 if h[k ](xj ) = yj then w[j] ← w[j] · error /(1 − error )
 w ← N ORMALIZE(w)
@@ -47826,7 +47826,7 @@ can described it more formally:
 3. Randomly choose an expert k∗ , in proportion to its weight: P (k) = wk /( k wk ).
 4. Predict ŷk∗ .
 5. Receive the correct answer y.
-6. For each expert k such that ŷk = y, update wk ← βwk
+6. For each expert k such that ŷk  = y, update wk ← βwk
 
 REGRET
 
@@ -48954,11 +48954,11 @@ return C URRENT-B EST-L EARNING(R EST(examples), h)
 else if e is a false positive for h then
 for each h  in specializations of h consistent with examples seen so far do
 h  ← C URRENT-B EST-L EARNING(R EST(examples), h  )
-if h  = fail then return h 
+if h   = fail then return h 
 else if e is a false negative for h then
 for each h  in generalizations of h consistent with examples seen so far do
 h  ← C URRENT-B EST-L EARNING(R EST(examples), h  )
-if h  = fail then return h 
+if h   = fail then return h 
 return fail
 Figure 19.2 The current-best-hypothesis learning algorithm. It searches for a consistent hypothesis that fits all the examples and backtracks when no consistent specialization/generalization can be found. To start the algorithm, any hypothesis can be passed in;
 it will be specialized or gneralized as needed.
@@ -50132,7 +50132,7 @@ Literals such as Mother (z, u), Married (z, z), ¬Male(y), and Grandfather (v, x
 allowed, whereas Married (u, v) is not. Notice that the use of the predicate from the
 head of the clause allows F OIL to learn recursive definitions.
 2. Equality and inequality literals: these relate variables already appearing in the clause.
-For example, we might add z = x. These literals can also include user-specified constants. For learning arithmetic we might use 0 and 1, and for learning list functions we
+For example, we might add z  = x. These literals can also include user-specified constants. For learning arithmetic we might use 0 and 1, and for learning list functions we
 might use the empty list [ ].
 3. Arithmetic comparisons: when dealing with functions of continuous variables, literals
 such as x > y and y ≤ z can be added. As in decision-tree learning, a constant
@@ -58569,7 +58569,7 @@ Z0 + λW Z0 + λW
 
 VANISHING POINT
 
-As λ → ∞ or λ → −∞, this becomes p∞ = (f U/W, f V /W ) if W = 0. This means that
+As λ → ∞ or λ → −∞, this becomes p∞ = (f U/W, f V /W ) if W  = 0. This means that
 two parallel lines leaving different points in space will converge in the image—for large λ,
 the image points are nearly the same, whatever the value of (X0 , Y0 , Z0 ) (again, think railway
 tracks, Figure 24.1). We call p∞ the vanishing point associated with the family of straight
@@ -59912,7 +59912,7 @@ three-dimensional space—perhaps the vertices of a polyhedral object. These are
 in some coordinate system that is natural for the object. The points are then subjected to
 an unknown three-dimensional rotation R, followed by translation by an unknown amount t
 and then projection to give rise to image feature points p1 , p2 , . . . , pN on the image plane.
-In general, N = M , because some model points may be occluded, and the feature detector
+In general, N  = M , because some model points may be occluded, and the feature detector
 could miss some features (or invent false ones due to noise). We can express this as
 pi = Π(Rmi + t) = Q(mi )
 for a three-dimensional model point mi and the corresponding image point pi . Here, R
@@ -64887,7 +64887,7 @@ Vectors, Matrices, and Linear Algebra
 1055
 
 to the class P when one does not have the luxury of an infinite number of processors or
-omniscient guessing. Most computer scientists are convinced that P = NP; that NP problems
+omniscient guessing. Most computer scientists are convinced that P  = NP; that NP problems
 are inherently hard and have no polynomial-time algorithms. But this has never been proven.
 Those who are interested in deciding whether P = NP look at a subclass of NP called the
 NP-complete problems. The word “complete” is used here in the sense of “most extreme”
@@ -64971,7 +64971,7 @@ TRANSPOSE
 INVERSE
 SINGULAR
 
-Matrix multiplication is not commutative, even for square matrices: AB = BA in general.
+Matrix multiplication is not commutative, even for square matrices: AB  = BA in general.
 It is, however, associative: (AB)C = A(BC). Note that the dot product can be expressed in
 terms of a transpose and a matrix multiplication:x · y = x y.
 The identity matrix I has elements Ii,j equal to 1 when i = j and equal to 0 otherwise.
